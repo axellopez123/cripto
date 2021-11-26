@@ -31,7 +31,7 @@ if (file_exists(__DIR__.'/../storage/framework/maintenance.php')) {
 |
 */
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/../laravel/vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -44,12 +44,12 @@ require __DIR__.'/../vendor/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
+$app = require_once __DIR__.'/../laravel/bootstrap/app.php';
 
-$kernel = $app->make(Kernel::class);
+$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
 $response = $kernel->handle(
-    $request = Request::capture()
+    $request = Illuminate\Http\Request::capture()
 )->send();
 
 $kernel->terminate($request, $response);
